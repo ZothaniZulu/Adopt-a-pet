@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    .container.mt-4
+        div.row
+            div.col-md-12.col-lg-12.col-sm-12.text-center.mt-5
+                != messages('message', locals) 
+        div.row
+            div.col-md-12.col-lg-12.col-sm-12.text-center
+                h1 #{title}
+            
+        div.row
+            each pet, i in pets
+                div.col-md-8.col-sm-8.col-lg-8.offset-2
+                    div.card
+                        div.card-header
+                            h4.text-center=pet.petName
+                        div.card-body
+                            img.img-thumbnail(src='/pet_pictures/'+pet.fileLocation)
+                            h5.text-center Pet Gender: #{pet.petName}
+                            h5.text-center Gender: #{pet.petGender}
+                            p.lead.text-center=pet.petDescription
+                            a.btn.btn-primary.btn-block(href='/pets/'+pet._id) View Pet
+                    //- Finish off the pet layout
+                    br
+

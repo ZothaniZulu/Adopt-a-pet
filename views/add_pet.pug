@@ -1,0 +1,35 @@
+extends layout
+
+block content
+   .container.mt-4
+      br
+      br
+      if errors
+      each error, i in errors
+         div(class="alert alert-danger") #{error.msg}
+      div.row
+         div.col-md-12.col-lg-12.col-sm-12.mt-5
+            h1 #{title}
+         
+            form(method='POST', action='http://localhost:3000/pets/submit_pet', encType='multipart/form-data')
+               #form-group
+                  label Pet Name:
+                  input.form-control(name='petName', type='text')
+               #form-group
+                  label Pet Type:
+                  input.form-control(name='petType', type='text')
+               #form-group
+                  label Pet Gender:
+                  input.form-control(name='petGender', type='text')
+               #form-group
+                  label Pet Description:
+                  textarea.form-control(name='petDescription', type='text')
+               #form-group
+                  label Picture of pet
+                  input.form-control(name='petPicture', type='file' required) 
+               #form-group
+                  label Uploaded By:
+                  input.form-control(name='uploadedBy', type='text', value=user.name readonly)
+                  input(name='userId', type='hidden' value=user._id)
+               br
+               input.btn.btn-primary(type='submit',value='Submit')   

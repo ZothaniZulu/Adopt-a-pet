@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title Adopt A Pet
+    link(rel='stylesheet' href='/bootstrap/css/bootstrap.css')
+    link(rel='stylesheet' href='/bootstrap/css/style.css')
+  body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+        a.navbar-brand(href='/') Adopt a pet
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarText', aria-expanded='false', aria-controls='navbarText', aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+        div.collapse.navbar-collapse#navbarText
+          ul.navbar-nav.ml-auto
+            li.nav-item
+              a.nav-link(href='/') Home
+            li.nav-item
+              a.nav-link(href='/navigations/profile') My Profile
+            li.nav-item
+              a.nav-link(href='/navigations/about') About
+            li.nav-item
+              a.nav-link(href='/navigations/contact') Contact
+            li.nav-item 
+              a.nav-link(href='/pets/add') Add pet
+            li.nav-item 
+              a.nav-link(href='/logout') Logout
+    .container
+
+      block content
+      br
+      br
+     
+  footer
+    div.footer.bg-dark.py-2
+      p.lead.text-white.text-center.footer-text  A project by Zothani S. Zulu copyright&copy2019
+        
+script(src='/jquery/jquery-3.4.1.js')  
+script(src='/bootstrap/js/bootstrap.js')
+   
