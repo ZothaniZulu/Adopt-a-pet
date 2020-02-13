@@ -182,7 +182,6 @@ app.use('/adoptions', adoptions);
 app.use('/navigations', navigations);
 app.use('/users', users);
 
-//End of routes
 
 
 
