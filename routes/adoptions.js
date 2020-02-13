@@ -24,7 +24,7 @@ function ensureAuthenticated(req, res, next){
   }
 }
 
-//Apply to adopt the pet
+//Apply to adopt the pet.
 router.get('/:id',ensureAuthenticated, function(req, res){
   let errors = '';
   Pet.findById(req.params.id, function(err, pet){
