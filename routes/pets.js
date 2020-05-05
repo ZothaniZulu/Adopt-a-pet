@@ -69,7 +69,7 @@ router.post('/submit_pet',[
     });
 
     //Pet picture variable for database
-    let petPictureName = req.files.petPicture.name
+    let petPictureName = req.files.petPicture.name;
     
     //Prepare to save pet to database
     let pet = new Pet();
@@ -109,9 +109,5 @@ router.get('/:id', ensureAuthenticated, function(req, res){
     });
   });
 });
-
-
-
-
 
 module.exports = router;
