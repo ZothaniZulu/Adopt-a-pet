@@ -11,9 +11,22 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
 
+mongoose.connect('mongodb://localhost:27017/adopt_a_pet', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+  
+let db = mongoose.connection;
 
-//connect to database
-require('./config/db')
+// Check connection
+db.once('open', function(){
+    console.log('Connected to MongoDB');
+  });
+  
+  // Check for DB errors
+  db.on('error', function(err){
+    console.log(err);
+  });
 
 // Init App
 const app = express();
@@ -59,8 +72,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-// Passport Config
-require('./config/passport')(passport);
 // Passport Middleware
 app.use(passport.initialize(console.log("Passport initialized")));
 app.use(passport.session(console.log("Passport session on standby")));
