@@ -15,6 +15,7 @@ function ensureAuthenticated(req, res, next){
     }
 }
 
+//Get users profile by user id
 router.get('/profile',ensureAuthenticated, function(req, res){
     User.findById(req.user._id, function(err, user){
         res.render('profile', {
@@ -24,12 +25,14 @@ router.get('/profile',ensureAuthenticated, function(req, res){
     });
  });
 
+//Get contact page
 router.get('/contact', ensureAuthenticated, function(req, res){
     res.render('contact',{
         title: 'Contact Us'
     });
 });
 
+//Get about page
 router.get('/about', ensureAuthenticated, function(req, res){
     res.render('about', {
         title: 'About'

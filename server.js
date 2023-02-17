@@ -12,23 +12,8 @@ const bcrypt = require('bcrypt');
 
 
 
-
-mongoose.connect('mongodb://localhost:27017/adopt_a_pet', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  });
-  
-let db = mongoose.connection;
-
-// Check connection
-db.once('open', function(){
-    console.log('Connected to MongoDB');
-  });
-  
-  // Check for DB errors
-  db.on('error', function(err){
-    console.log(err);
-  });
+//connect to database
+require('./config/db')
 
 // Init App
 const app = express();
@@ -74,47 +59,13 @@ app.use(function (req, res, next) {
   next();
 });
 
+// Passport Config
+require('./config/passport')(passport);
 // Passport Middleware
 app.use(passport.initialize(console.log("Passport initialized")));
 app.use(passport.session(console.log("Passport session on standby")));
 
-/* Passport Authentication */
-// Local Strategy
-passport.use(new LocalStrategy(function(username, password, done){
-  // Match username
-  let query = {username:username};
-  User.findOne(query, function(err, user){
-    if(err) throw err;
-    if(!user){
-      return done(null, false, {message: 'No user found'});
-     
-    }
 
-    // Match Password
-    bcrypt.compare(password, user.password, function(err, isMatch){
-      if(err) throw err;
-      if(isMatch){
-        return done(null, user);
-      } else {
-        return done(null, false, {message: 'Wrong password'});
-      }
-    });
-  });
-}));
-
-//Passport Sessions
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-/* End of Passport Authentication */
 
 /* User Access routes */
 
@@ -127,7 +78,7 @@ app.get('/login', function(req, res){
 
 //login request
 app.post('/login', 
-      passport.authenticate('local', { failureRedirect: '/login' }),
+      passport.authenticate('local', { failureRedirect: '/login'}),
       function(req, res) {
         res.redirect('/');
         console.log("User Logged in");
@@ -146,7 +97,6 @@ function ensureAuthenticated(req, res, next){
   if(req.isAuthenticated()){
     return next();
   } else {
-   
     res.redirect('/login');
   }
 }
@@ -167,10 +117,8 @@ app.get('/',ensureAuthenticated, function(req, res){
       });
     }
   });
-});
-
-
-  
+}); 
+ 
 
 //Route files
 let pets = require('./routes/pets');
@@ -181,9 +129,6 @@ app.use('/pets', pets);
 app.use('/adoptions', adoptions);
 app.use('/navigations', navigations);
 app.use('/users', users);
-
-
-
 
 
 

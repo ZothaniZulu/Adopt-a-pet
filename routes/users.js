@@ -89,6 +89,7 @@ router.post('/register',[
     }
 });
 
+//Edit profile
 router.get('/edit_profile/:id', ensureAuthenticated, function(req, res){
     User.findById(req.params.id, function(err, user){
         let errors = '';
@@ -100,6 +101,7 @@ router.get('/edit_profile/:id', ensureAuthenticated, function(req, res){
     });
 });
 
+//Submit profile edits
 router.post('/update_profile', [
     check('name', 'Please enter your name').isLength({min:3}),
     check('cellphoneNumber', 'Your cellphone number has to be be 10 digits long').isLength({min:10}),
@@ -139,11 +141,5 @@ router.post('/update_profile', [
         });
       }
 });
-
-
-
-
-
-
 
 module.exports = router;

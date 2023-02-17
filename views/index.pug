@@ -17,7 +17,6 @@ block content
                             h4.text-center=pet.petName
                         div.card-body
                             img.img-thumbnail(src='/pet_pictures/'+pet.fileLocation)
-                            h5.text-center Pet Gender: #{pet.petName}
                             h5.text-center Gender: #{pet.petGender}
                             p.lead.text-center=pet.petDescription
                             a.btn.btn-primary.btn-block(href='/pets/'+pet._id) View Pet
