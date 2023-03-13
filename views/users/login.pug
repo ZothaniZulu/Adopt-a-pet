@@ -3,12 +3,12 @@ extends user_layout
 block content
     .container
         div.row
-            div.col-md-6.col-lg-6.offset-md-3.offset-lg-3.mt-5.text-center
+            div.col-md-6.col-lg-6.offset-md-3.offset-lg-3.text-center
                 != messages('message', locals) 
         div.row
-            div.col-md-10.col-lg-10.offset-md-1.offset-lg-1.mt-5
+            div.col-md-10.col-lg-10.offset-md-1.offset-lg-1
                 div.row
-                   div.col-md-4.col-lg-4.offset-md-4.offset-lg-4
+                   div.col-md-6.col-lg-6.offset-md-3.offset-lg-3
                         img.img-fluid(src='/system_images/cat.jpg')
                 div.row
                    div.col-md-6.col-lg-6.offset-md-3.offset-lg-3
@@ -24,4 +24,6 @@ block content
                                 br
                                 input.btn.btn-primary.btn-block(type='submit',value='Login') 
                                 a.btn.btn-secondary.btn-block(href='/users/register') Register 
+        footer.py-3.bg-light
+            p.lead.text-center &copy Adopt A Pet, created by Zothani S. Zulu
     
