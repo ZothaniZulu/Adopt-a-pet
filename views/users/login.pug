@@ -8,16 +8,19 @@ block content
         div.row
             div.col-md-10.col-lg-10.offset-md-1.offset-lg-1.mt-5
                 div.row
+                   div.col-md-4.col-lg-4.offset-md-4.offset-lg-4
+                        img.img-fluid(src='/system_images/cat.jpg')
+                div.row
                    div.col-md-6.col-lg-6.offset-md-3.offset-lg-3
                         div.user-sign-in 
                             h2.text-center Login
                             form(method='POST', action='http://localhost:3000/login')
                                 #form-group 
                                     label Email Address
-                                    input.form-control(name='username', type='email' required)
+                                    input.form-control(name='username', type='email' placeholder='Enter email address' required)
                                 #form-group 
                                     label Password
-                                    input.form-control(name='password', type='password' required)
+                                    input.form-control(name='password', type='password' placeholder='Enter password' required)
                                 br
                                 input.btn.btn-primary.btn-block(type='submit',value='Login') 
                                 a.btn.btn-secondary.btn-block(href='/users/register') Register 
