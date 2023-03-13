@@ -85,10 +85,14 @@ app.post('/login',
 });
 
 //Logout
-app.get('/logout', function(req, res){
-  req.logout();
-  req.flash('success', 'You are logged out');
-  res.redirect('/login');
+app.get('/logout', function(req, res, next){
+  req.logout(function(err){
+    if(err){
+      return next(err);
+    }
+    req.flash('success', 'You are logged out');
+    res.redirect('/login');
+  });
 });
 
 
