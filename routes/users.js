@@ -136,7 +136,7 @@ router.post('/update_profile', [
                 //The update is a success
                 console.log("Profile Updated Successfully");
                 req.flash('success', 'Profile updated successfully');
-                res.redirect('/');
+                res.redirect('/navigations/profile');
             }
         });
       }
