@@ -2,6 +2,7 @@ const express = require('express');
 const { check, validationResult } = require('express-validator');
 const path = require('path');
 const passport = require('passport');
+const nodemailer = require('nodemailer');
 const router = express.Router();
 
 
@@ -74,15 +75,37 @@ router.post('/application',[
       adoption.userId = req.body.userId;
       adoption.motivation = req.body.motivation;
 
+
+
       //Save the adoption to the database
       adoption.save(function(err){
           if(err){
             console.log(err);
             return;
           }else{
+            let transporter = nodemailer.createTransport({
+              host: 'smtp.office365.com',
+              auth: {
+                  user: 'adoptapet2019@outlook.com',
+                  pass: '2580456@Owen'
+              }
+          });
+
+          let mailOptions = {
+              from: 'adoptapet2019@outlook.com',
+              to: req.body.userEmail,
+              subject: 'Adoption application received', 
+              text: 'Hello, your application to adopt a pet has been received, we will be in touch with you soon.'
+          }
+
+          transporter.sendMail(mailOptions, function(error, info){
+              if(error){
+                  return console.log(error)
+              }else{
+                  console.log('Message sent:' +info.response)
+              }
+          });
             console.log('Adoption submitted successfully');
-            console.log(req.user._id);
-            console.log(req.user.username);
             req.flash('info', 'Adoption application submitted successfully, we will contact you once it is processed.');
             res.redirect('/');
           }
